@@ -9,13 +9,36 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title><?php wp_title( '|', true, 'right' ); ?></title>
+    <title>
+        <?php
+        // Print the <title> tag based on what is being viewed.
+        global $page, $paged;
+
+        wp_title( '|', true, 'right' );
+
+        // Add the site name.
+        bloginfo( 'name' );
+
+        // Add the site description for the home/front page.
+        $site_description = get_bloginfo( 'description', 'display' );
+        if ( $site_description && ( is_home() || is_front_page() ) ) {
+          echo " | $site_description";
+        }
+
+          // Add a page number if necessary:
+        if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() ) {
+          /* translators: %s: Page number. */
+          echo esc_html( ' | ' . sprintf( __( 'Page %s', 'twentyeleven' ), max( $paged, $page ) ) );
+        }
+
+        ?>
+    </title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href="<?php echo get_stylesheet_directory_uri() ?>/style.css" rel="stylesheet">
+    <!-- <link href="<?php echo get_stylesheet_directory_uri() ?>/style.css" rel="stylesheet"> -->
     <?php wp_head();?>
   </head>
 

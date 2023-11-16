@@ -140,6 +140,7 @@ h6, .h6 {
 .pager {
   margin-bottom: 60px;
   text-align: left;
+  list-style: none;
 }
 .pager > li > a {
   width: 140px;

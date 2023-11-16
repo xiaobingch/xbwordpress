@@ -22,10 +22,12 @@
 
           <nav>
             <ul class="pager">
-              <li><?php previous_post_link("上一页")?></li>
-              <li><?php next_post_link("下一页")?></li>
+              <li><?php previous_posts_link("上一页")?></li>
+              <li><?php next_posts_link("下一页")?></li>
             </ul>
           </nav>
+
+
 
         </div><!-- /.blog-main -->
 
