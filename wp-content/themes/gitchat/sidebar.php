@@ -2,7 +2,7 @@
           <div class="sidebar-module sidebar-module-inset">
             <h4>About</h4>
             <p>
-              <?php the_author_meta("description")?>
+              <?php echo of_get_option('xbuser_name') . "," .  of_get_option('xbuser_email') . "," .  of_get_option('xbuser_url');?>
             </p>
           <div class="sidebar-module">
             <h4>Archives</h4>

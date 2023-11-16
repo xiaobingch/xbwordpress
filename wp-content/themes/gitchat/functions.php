@@ -1,5 +1,12 @@
 <?php
-
+//主题选项
+define( 'OPTIONS_FRAMEWORK_DIRECTORY', get_template_directory_uri() . '/inc/' );
+require_once dirname( __FILE__ ) . '/inc/options-framework.php';
+// Loads options.php from child or parent theme
+$optionsfile = locate_template( 'options.php' );
+load_template( $optionsfile );
+ 
+//去除谷歌字体
 function remove_open_sans() {
     wp_deregister_style( 'open-sans' );
     wp_register_style( 'open-sans', false );
