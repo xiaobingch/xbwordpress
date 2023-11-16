@@ -88,8 +88,8 @@ class Options_Framework_Admin {
             'mode' => 'submenu',
 
             // Submenu default settings
-            'page_title' => __( 'Theme Options', 'theme-textdomain' ),
-			'menu_title' => __( 'Theme Options', 'theme-textdomain' ),
+            'page_title' => __( '主题选项', 'theme-textdomain' ),
+			'menu_title' => __( '主题选项', 'theme-textdomain' ),
 			'capability' => 'edit_theme_options',
 			'menu_slug' => 'options-framework',
             'parent_slug' => 'themes.php',
