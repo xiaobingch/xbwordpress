@@ -120,16 +120,16 @@ function gitchat_about_page(){
 }
 ?>
 <!-- 素材-WordPress 的按钮样式-->
-<input type="submit" name="test" value="普通按钮" />
+<!-- <input type="submit" name="test" value="普通按钮" />
 <input type="submit" name="test" value="标准按钮" class="button" />
 <input type="submit" name="test" value="主要按钮" class="button button-primary" />
 <input type="submit" name="test" value="副按钮" class="button button-secondary" />
 <input type="submit" name="test" value="大按钮" class="button button-large" />
 <input type="submit" name="test" value="小按钮" class="button button-small" />
-<input type="submit" name="test" value="超大按钮" class="button button-hero" />
+<input type="submit" name="test" value="超大按钮" class="button button-hero" /> -->
 
 <!-- 素材-使用 WordPress 自带的表单样式 -->
-<form method="POST" action="">
+<!-- <form method="POST" action="">
             <table class="form-table">
                 <tr valign="top">
                     <th><label for="input-example">输入框</label></th>
@@ -166,10 +166,10 @@ function gitchat_about_page(){
                     </td>
                 </tr>
             </table>
-        </form>
+        </form> -->
 
  <!-- 素材-WordPress 自带的表格样式 -->
- <table class="widefat striped">
+ <!-- <table class="widefat striped">
             <thead>
                 <tr>
                     <th>序号</th>
@@ -190,4 +190,4 @@ function gitchat_about_page(){
                     <td>Webpack 达人的成长之路</td>
                 </tr>
             </tbody>
-        </table>
+        </table> -->
