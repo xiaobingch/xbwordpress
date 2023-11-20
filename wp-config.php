@@ -84,6 +84,7 @@ define( 'WP_DEBUG', true );
 /* Add any custom values between this line and the "stop editing" line. */
 
 
+define('WPLANG', 'zh_CN');
 
 /* That's all, stop editing! Happy publishing. */
 
