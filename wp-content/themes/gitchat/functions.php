@@ -83,3 +83,14 @@ function remove_footer_admin () {
   echo '由<a href="">gitchat </a>开发';
 }
 add_filter('admin_footer_text', 'remove_footer_admin');
+
+// 主题国际化，多语言
+function i10n(){
+  $current_locale = get_locale();
+  if(!empty($current_locale)){
+      $mo_file = dirname(__FILE__).'/languages/'.$current_locale.".mo";
+      if (@file_exists($mo_file)&& is_readable($mo_file))
+          load_textdomain('your-plugins',$mo_file);
+  }
+}
+add_action('init','i10n');
