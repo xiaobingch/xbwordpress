@@ -27,71 +27,74 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 add_action('post_submitbox_misc_actions', 'cus_author_createCustomField');
 add_action('save_post', 'cus_author_saveCustomField');
 /** 创建一个checkBox */
-function cus_author_createCustomField() {
-	$post_id = get_the_ID();
-	if (get_post_type($post_id) != 'post') {
-		return;
-	}
-	/**
-	 * 提取现有的值
-	 * @var boolean
-	 */
-	$value = get_post_meta($post_id, '_custom_author_name', true);
-	/**
-	 * 添加 nonce 安全处理
-	 */
-	wp_nonce_field('custom_author_nonce' , 'custom_author_nonce');
-	?>
+function cus_author_createCustomField()
+{
+    $post_id = get_the_ID();
+    if (get_post_type($post_id) != 'post') {
+        return;
+    }
+    /**
+     * 提取现有的值
+     * @var boolean
+     */
+    $value = get_post_meta($post_id, '_custom_author_name', true);
+    /**
+     * 添加 nonce 安全处理
+     */
+    wp_nonce_field('custom_author_nonce', 'custom_author_nonce');
+?>
     <div class="misc-pub-section misc-pub-section-last dashicons-before dashicons-admin-users">
         <label><b>作者：</b><input type="text" value="<?php echo $value ?>" name="_custom_author_name" /></label>
     </div>
-    <?php   
+<?php
 }
 /**
  * 保存配置信息
  * @param  int $post_id 文章的ID
  */
-function cus_author_saveCustomField($post_id) {
-	/**
-	 * 自动保存不处理
-	 */
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-		return;
-	}
-	/**
-	 * nonce 信息不正确不处理
-	 */
-	if (
-		!isset($_POST['custom_author_nonce']) ||
-		!wp_verify_nonce($_POST['custom_author_nonce'], 'custom_author_nonce')
-	) {
-		return;
-	}
-	/**
-	 * 用户无权编辑文件不处理
-	 */
-	if (!current_user_can('edit_post', $post_id)) {
-		return;
-	}
-	/**
-	 * 存在此项目就更新
-	 */
-	if (isset($_POST['_custom_author_name'])) {
-		update_post_meta($post_id, '_custom_author_name', sanitize_text_field($_POST['_custom_author_name']));
-	} else {
-		/**
-		 * 不存在就删除
-		 */
-		delete_post_meta($post_id, '_custom_author_name');
-	}
+function cus_author_saveCustomField($post_id)
+{
+    /**
+     * 自动保存不处理
+     */
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+    /**
+     * nonce 信息不正确不处理
+     */
+    if (
+        !isset($_POST['custom_author_nonce']) ||
+        !wp_verify_nonce($_POST['custom_author_nonce'], 'custom_author_nonce')
+    ) {
+        return;
+    }
+    /**
+     * 用户无权编辑文件不处理
+     */
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+    /**
+     * 存在此项目就更新
+     */
+    if (isset($_POST['_custom_author_name'])) {
+        update_post_meta($post_id, '_custom_author_name', sanitize_text_field($_POST['_custom_author_name']));
+    } else {
+        /**
+         * 不存在就删除
+         */
+        delete_post_meta($post_id, '_custom_author_name');
+    }
 }
 
-add_filter('the_author','cus_author_the_author');
-function cus_author_the_author($author){
+add_filter('the_author', 'cus_author_the_author');
+function cus_author_the_author($author)
+{
     $custom_author = get_post_meta(get_the_ID(), '_custom_author_name');
     if ($custom_author) {
-		return $custom_author[0];
-	} else {
-		return $author;
-	}
+        return $custom_author[0];
+    } else {
+        return $author;
+    }
 }

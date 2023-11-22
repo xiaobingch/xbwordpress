@@ -983,3 +983,73 @@ if ( ! function_exists( 'wp_get_list_item_separator' ) ) :
 		return __( ', ', 'twentyeleven' );
 	}
 endif;
+
+//注册招聘文章类型
+function create_custom_post_type() {
+    register_post_type('job-post', array(
+        'labels' => array(
+            'name' => '招聘',
+            'singular_name' => '招聘',
+            'add_new' => '添加招聘', // 将“写文章”修改为“添加招聘”
+            'add_new_item' => '添加招聘', // 将“写文章”修改为“添加招聘”
+            'edit_item' => '编辑招聘', // 修改编辑文章的标签
+            'new_item' => '新建招聘', // 修改新建文章的标签
+            'view_item' => '查看招聘', // 修改查看文章的标签
+            'search_items' => '搜索招聘', // 修改搜索文章的标签
+            'not_found' => '未找到招聘', // 修改未找到文章的标签
+            'not_found_in_trash' => '回收站中未找到招聘', // 修改回收站中未找到文章的标签
+            'parent_item_colon' => '父级招聘', // 修改父级文章的标签
+            'menu_name' => '招聘', // 修改菜单名称
+        ),
+        'public' => true,
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'job-post'),
+        'supports' => array('title', 'editor', 'excerpt', 'thumbnail'), // 将“摘要”修改为“职位摘要”，“特色图像”修改为“公司logo”
+    ));
+}
+add_action('init', 'create_custom_post_type');
+
+
+// function modify_post_type_labels($args, $post_type) {
+//     if ($post_type === 'job-post') {
+//         $args['labels']['featured_image'] = '公司logo'; // 将“特色图像”修改为“公司logo”
+//         $args['labels']['set_featured_image'] = '设置公司logo'; // 修改设置特色图像的标签
+//         $args['labels']['remove_featured_image'] = '移除公司logo'; // 修改移除特色图像的标签
+//         $args['labels']['use_featured_image'] = '使用公司logo'; // 修改使用特色图像的标签
+//         $args['labels']['excerpt'] = '职位摘要'; // 将“摘要”修改为“职位摘要”
+//     }
+//     return $args;
+// }
+// add_filter('register_post_type_args', 'modify_post_type_labels', 10, 2);
+
+
+// 注册自定义分类法
+function register_company_taxonomy() {
+    $labels = array(
+        'name' => '公司',
+        'singular_name' => '公司',
+        'search_items' => '搜索公司',
+        'all_items' => '所有公司',
+        'parent_item' => '父级公司',
+        'parent_item_colon' => '父级公司：',
+        'edit_item' => '编辑公司',
+        'update_item' => '更新公司',
+        'add_new_item' => '添加新公司',
+        'new_item_name' => '新公司名称',
+        'menu_name' => '公司',
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => true,
+        'public' => true,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => array( 'slug' => 'company' ),
+    );
+
+    // 将分类法应用于文章类型
+    register_taxonomy( 'company', array( 'post', 'job-post' ), $args );
+}
+add_action( 'init', 'register_company_taxonomy' );
