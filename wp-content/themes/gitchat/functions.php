@@ -80,7 +80,7 @@ add_action('wp_logout','auto_redirect_after_logout');
 
 // 后台底部文字
 function remove_footer_admin () {
-  echo '由<a href="">gitchat </a>开发';
+  echo '由<a href="baidu.com">gitchat </a>开发';
 }
 add_filter('admin_footer_text', 'remove_footer_admin');
 

@@ -169,72 +169,7 @@ function acf_print_menu_section( $menu_items, $section = '' ) {
 	echo $section_html;
 }
 ?>
-<div class="acf-admin-toolbar">
-	<div class="acf-admin-toolbar-inner">
-		<div class="acf-nav-wrap">
-			<a href="<?php echo admin_url( 'edit.php?post_type=acf-field-group' ); ?>" class="acf-logo">
-				<img src="<?php echo acf_get_url( 'assets/images/acf-logo.svg' ); ?>" alt="<?php esc_attr_e( 'Advanced Custom Fields logo', 'acf' ); ?>">
-				<?php if ( acf_is_pro() && acf_pro_is_license_active() ) { ?>
-					<div class="acf-pro-label">PRO</div>
-				<?php } ?>
-			</a>
 
-			<h2><?php echo acf_get_setting( 'name' ); ?></h2>
-			<?php acf_print_menu_section( $core_tabs, 'core' ); ?>
-			<?php if ( $acf_more_items || $more_items ) { ?>
-				<div class="acf-more acf-header-tab-acf-more" tabindex="0">
-					<span class="acf-tab acf-more-tab"><i class="acf-icon acf-icon-more"></i><?php esc_html_e( 'More', 'acf' ); ?> <i class="acf-icon acf-icon-dropdown"></i></span>
-					<ul>
-						<?php
-						if ( $acf_more_items ) {
-							if ( $more_items ) {
-								echo '<li class="acf-more-section-header"><span class="acf-tab acf-tab-header">ACF</span></li>';
-							}
-							acf_print_menu_section( $acf_more_items, 'acf' );
-						}
-						if ( $more_items ) {
-							echo '<li class="acf-more-section-header"><span class="acf-tab acf-tab-header">' . esc_html__( 'Other', 'acf' ) . ' </span></li>';
-							acf_print_menu_section( $more_items );
-						}
-						if ( $wpengine_more_items ) {
-							acf_print_menu_section( $wpengine_more_items );
-						}
-						?>
-					</ul>
-				</div>
-			<?php } ?>
-		</div>
-		<div class="acf-nav-upgrade-wrap">
-			<?php
-			if ( ! acf_is_pro() || ! acf_pro_is_license_active() ) {
-				$unlock_url    = acf_add_url_utm_tags( 'https://www.advancedcustomfields.com/pro/', 'ACF upgrade', 'header' );
-				$unlock_target = '_blank';
-				$unlock_text   = __( 'Unlock Extra Features with ACF PRO', 'acf' );
-
-				if ( acf_is_pro() ) {
-					$unlock_url    = admin_url( 'edit.php?post_type=acf-field-group&page=acf-settings-updates#acf_pro_license' );
-					$unlock_target = '';
-
-					if ( acf_pro_is_license_expired() ) {
-						$unlock_url    = acf_add_url_utm_tags( acf_pro_get_manage_license_url(), 'ACF renewal', 'header' );
-						$unlock_target = '_blank';
-						$unlock_text   = __( 'Renew ACF PRO License', 'acf' );
-					}
-				}
-				?>
-				<a target="<?php echo esc_attr( $unlock_target ); ?>" href="<?php echo esc_url( $unlock_url ); ?>" class="btn-upgrade acf-admin-toolbar-upgrade-btn">
-					<i class="acf-icon acf-icon-stars"></i>
-					<p><?php echo esc_html( $unlock_text ); ?></p>
-				</a>
-				<?php
-			}
-			?>
-			<a href="<?php echo $acf_wpengine_logo_link; ?>" target="_blank" class="acf-nav-wpengine-logo">
-				<img src="<?php echo esc_url( acf_get_url( 'assets/images/wp-engine-horizontal-white.svg' ) ); ?>" alt="<?php esc_html_e( 'WP Engine logo', 'acf' ); ?>" />
-			</a>
-		</div>
-	</div>
-</div>
 
 <?php
 
